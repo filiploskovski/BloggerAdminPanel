@@ -1,20 +1,121 @@
 <section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Monthly Subscription</h1>
-            </div>
-        </div>
-        <hr>
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-              <a class="nav-link" (click) = "changeMenu(1)">Edit</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click) = "changeMenu(2)">Grid</a>
-            </li>
-          </ul>
-        <hr>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Monthly Subscription</h1>
+      </div>
     </div>
+    <hr>
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link" (click)="changeMenu(1)">Edit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="changeMenu(2)">Grid</a>
+      </li>
+    </ul>
+    <hr>
+  </div>
 </section>
 
+
+<section class="content edit" *ngIf="EDIT_FLAG">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-6">
+        <!-- Form Generate Monthly Subscrition -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Generate Monthly Subscrition</h3>
+          </div>
+          <form [formGroup]="generateMSForm" (ngSubmit)="GenerateMS()">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" placeholder="Date"
+                  formControlName="date" />
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary" [disabled]="!generateMSForm.valid">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- !Form Generate Monthly Subscrition -->
+
+        <!-- Form Approve -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Generated Matches</h3>
+          </div>
+          <div class="card-body" *ngIf = "tableHeaders.length != 0">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th *ngFor="let column of tableHeaders">
+                    {{ column }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of tableMatches.list">
+                  <td *ngFor="let column of tableHeaders">
+                    {{ row[column] }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <p>Total odd: {{tableMatches.totalOdd}}</p>
+            <button type="button" class="btn btn-primary" (clikc) = "Approve()">Approve</button>
+          </div>
+        </div>
+        <!-- !Form Approve -->
+      </div>
+
+      <div class="col-md-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Upload Monthly Subscription</h3>
+          </div>          
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Date</label>
+            <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Date" />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Match</label>
+            <input type="text" class="form-control" id="Match" placeholder="Match" />
+          </div>
+          <div class="form-group">
+            <label for="tip">Tip</label>
+            <input type="text" class="form-control" id="Tip" placeholder="Tip" />
+          </div>
+          <div class="form-group">
+            <label for="Odd">Odd</label>
+            <input type="text" class="form-control" id="Odd" placeholder="Odd" />
+          </div>
+          <div class="form-group">
+            <label for="Result">Result</label>
+            <input type="text" class="form-control" id="Result" placeholder="Result" />
+          </div>
+          <div class="form-group">
+            <label for="WinLose">WinLose</label>
+            <input type="text" class="form-control" id="WinLose" placeholder="WinLose" />
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content grid" *ngIf="GRID_FLAG">
+  <app-grid (edit)="edit($event)" (delete)="delete($event)"></app-grid>
+</section>

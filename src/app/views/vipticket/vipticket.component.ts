@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { MatchesService } from 'src/app/utils/services/matches.service';
 
 @Component({
   selector: 'app-vipticket',
@@ -9,9 +12,19 @@ export class VipticketComponent implements OnInit {
   public EDIT_FLAG = true;
   public GRID_FLAG = false;
 
-  constructor() {}
+  generateVipTicketForm = new FormGroup({
+    generateVipTicketDate: new FormControl('',[Validators.required]),
+  });
 
-  ngOnInit(): void {}
+  public generatedVipTicket: any;
+  public generatedVipTicketTableHeaders = [];
+  public geratedVipTicketTotalWin = 1;
+
+  constructor(private matchesService: MatchesService) {}
+
+  ngOnInit(): void {
+    console.log(this.generatedVipTicketTableHeaders);
+  }
 
   changeMenu(menu) {
     if (menu == 1) {
@@ -21,5 +34,26 @@ export class VipticketComponent implements OnInit {
       this.EDIT_FLAG = false;
       this.GRID_FLAG = true;
     }
+  }
+
+  onKey(event: any) { 
+    this.geratedVipTicketTotalWin = (event.target.value * this.generatedVipTicket.totalOdd); 
+  }
+
+  GenerateVipTicketSubmit(){
+      console.log(this.generateVipTicketForm);
+      this.generatedVipTicket = this.matchesService.generatetVipTicket(this.generateVipTicketForm.value.generateVipTicketDate);
+      this.generatedVipTicketTableHeaders = Object.keys(this.generatedVipTicket.list[0]);
+  }
+
+  GenerateVipTicketTemplates(){
+  }
+
+  edit(data) {
+    this.changeMenu(1);
+    console.log(data);
+  }
+  delete(data) {
+    console.log(data);
   }
 }

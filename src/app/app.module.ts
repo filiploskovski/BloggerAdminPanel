@@ -26,6 +26,9 @@ import { VipticketComponent } from './views/vipticket/vipticket.component';
 import { MonthlySubscriptionComponent } from './views/monthly-subscription/monthly-subscription.component';
 import { FreeTipsComponent } from './views/free-tips/free-tips.component';
 
+import { DataTablesModule } from 'angular-datatables';
+import { GridComponent } from './components/grid/grid.component';
+
 registerLocaleData(localeEn, 'en-EN');
 
 @NgModule({
@@ -46,12 +49,14 @@ registerLocaleData(localeEn, 'en-EN');
     VipticketComponent,
     MonthlySubscriptionComponent,
     FreeTipsComponent,
+    GridComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    DataTablesModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
