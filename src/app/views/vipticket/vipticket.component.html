@@ -1,0 +1,141 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Vip Ticket</h1>
+            </div>
+        </div>
+        <hr>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+              <a class="nav-link" (click) = "changeMenu(1)">Edit</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click) = "changeMenu(2)">Grid</a>
+            </li>
+          </ul>
+        <hr>
+    </div>
+</section>
+
+<!-- Edit content -->
+<section class="content edit" *ngIf="EDIT_FLAG">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Form Generate Vip Ticket -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Generate Vip Ticket</h3>
+                    </div>
+                    <!-- <form action=""> -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date</label>
+                            <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Date">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+                <!-- !Form Generate Vip Ticket -->
+
+                 <!-- Form Approve Vip Ticket -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Generated Matches</h3>
+                    </div>
+                    <div class="card-body">
+                         <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Time</th>
+                                <th>Match</th>
+                                <th>Coef</th>
+                                <th>Tip</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>Update software</td>
+                                <td>123123</td>
+                                <td>123</td>
+                                <td>asdas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <!-- <form action=""> -->
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Bet">
+                        </div>
+                        <p>Total Coef: </p>
+                        <p>Win:  </p>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- </form> -->
+                    
+                    </div>
+                </div>
+                <!-- !Form Approve Vip Ticket -->
+            </div>
+            <!-- Form Upload Vip Ticket -->
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Upload Vip Ticket</h3>
+                    </div>
+
+                    <!-- form start -->
+
+                    <!-- <form role="form"> -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Date</label>
+                            <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Date">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Seo Keywords</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                placeholder="Seo Keywords">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="">Upload</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">First page</label>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <!-- </form> -->
+
+                </div>
+            </div>
+            <!-- !Form New Vip Ticket -->
+        </div>
+    </div>
+</section>
+<!-- !Edit content -->
+
+<!-- Grid content -->
+<section class="content grid" *ngIf="GRID_FLAG">
+  
+</section>
+<!-- Edit content -->
