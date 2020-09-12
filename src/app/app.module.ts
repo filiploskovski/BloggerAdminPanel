@@ -8,7 +8,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './pages/main/header/header.component';
 import { FooterComponent } from './pages/main/footer/footer.component';
 import { MenuSidebarComponent } from './pages/main/menu-sidebar/menu-sidebar.component';
-import { BlankComponent } from './views/blank/blank.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './views/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +23,8 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import { UserDropdownMenuComponent } from './pages/main/header/user-dropdown-menu/user-dropdown-menu.component';
 import { VipticketComponent } from './views/vipticket/vipticket.component';
+import { MonthlySubscriptionComponent } from './views/monthly-subscription/monthly-subscription.component';
+import { FreeTipsComponent } from './views/free-tips/free-tips.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -35,7 +36,6 @@ registerLocaleData(localeEn, 'en-EN');
     HeaderComponent,
     FooterComponent,
     MenuSidebarComponent,
-    BlankComponent,
     ProfileComponent,
     RegisterComponent,
     DashboardComponent,
@@ -44,6 +44,8 @@ registerLocaleData(localeEn, 'en-EN');
     AppButtonComponent,
     UserDropdownMenuComponent,
     VipticketComponent,
+    MonthlySubscriptionComponent,
+    FreeTipsComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ registerLocaleData(localeEn, 'en-EN');
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    NgbModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],

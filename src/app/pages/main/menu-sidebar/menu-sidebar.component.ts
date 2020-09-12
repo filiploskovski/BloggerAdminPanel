@@ -19,8 +19,9 @@ export class MenuSidebarComponent implements OnInit, AfterViewInit {
 
   public menuItems = [
     { routerLink: '/', name: 'Dashboard', icon: 'fas fa-tachometer-alt' },
-    { routerLink: '/blank', name: 'Blank', icon: 'fas fa-tachometer-alt' },
     { routerLink: '/vipticket', name: 'Vip Ticket', icon: 'fab fa-buffer' },
+    { routerLink: '/monthlysubscription', name: 'Monthly Subscription', icon: 'fas fa-fan' },
+    { routerLink: '/freetips', name: 'Free Tips', icon: 'fas fa-hand-point-right' },
   ];
 
   constructor(public appService: AppService) {}
