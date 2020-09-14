@@ -53,7 +53,8 @@ export class MonthlySubscriptionComponent implements OnInit {
       next: (item: any) => {
         this.gridData = item.Matches;
       },
-      complete:() => {this.gridComponent.rerender()}
+      complete:() => {
+      }
     });
   }
 

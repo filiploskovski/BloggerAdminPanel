@@ -33,7 +33,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="date">Date</label>
-                <input type="date" class="form-control" id="date" placeholder="Date" formControlName="date" />
+                <input type="date" class="form-control form-control-sm" id="date" placeholder="Date" formControlName="date" />
               </div>
             </div>
             <div class="card-footer">
@@ -81,35 +81,35 @@
             <h3 class="card-title">Upload Monthly Subscription</h3>
           </div>
           <form [formGroup]="createUpdate" (ngSubmit)="EditDatabase()">
-            <input type="hidden" class="form-control" id="Id" placeholder="Id" formControlName = "Id"/>
+            <input type="hidden" class="form-control form-control-sm" id="Id" placeholder="Id" formControlName = "Id"/>
             <div class="card-body">
               <div class="form-group">
                 <label for="Date">Date</label>
-                <input type="date" class="form-control" id="Date" placeholder="Date" formControlName = "Date"/>
+                <input type="date" class="form-control form-control-sm" id="Date" placeholder="Date" formControlName = "Date"/>
               </div>
               <div class="form-group">
                 <label for="Match">Match</label>
-                <input type="text" class="form-control" id="Match" placeholder="Match" formControlName = "Match"/>
+                <input type="text" class="form-control form-control-sm" id="Match" placeholder="Match" formControlName = "Match"/>
               </div>
               <div class="form-group">
                 <label for="tip">Tip</label>
-                <input type="text" class="form-control" id="Tip" placeholder="Tip" formControlName = "Tip"/>
+                <input type="text" class="form-control form-control-sm" id="Tip" placeholder="Tip" formControlName = "Tip"/>
               </div>
               <div class="form-group">
                 <label for="Odd">Odd</label>
-                <input type="text" class="form-control" id="Odd" placeholder="Odd" formControlName = "Odd"/>
+                <input type="text" class="form-control form-control-sm" id="Odd" placeholder="Odd" formControlName = "Odd"/>
               </div>
               <div class="form-group">
                 <label for="Result">Result</label>
-                <input type="text" class="form-control" id="Result" placeholder="Result" formControlName = "Result"/>
+                <input type="text" class="form-control form-control-sm" id="Result" placeholder="Result" formControlName = "Result"/>
               </div>
               <div class="form-group">
                 <label for="Result">Description</label>
-                <input type="text" class="form-control" id="Description" placeholder="Description" formControlName = "Description"/>
+                <input type="text" class="form-control form-control-sm" id="Description" placeholder="Description" formControlName = "Description"/>
               </div>
               <div class="form-group">
                 <label for="WinLose">WinLose</label>
-                <input type="text" class="form-control" id="WinLose" placeholder="WinLose" formControlName = "WinLose"/>
+                <input type="text" class="form-control form-control-sm" id="WinLose" placeholder="WinLose" formControlName = "WinLose"/>
               </div>
             </div>
             <div class="card-footer">
@@ -124,5 +124,5 @@
 </section>
 
 <section class="content grid" *ngIf="GRID_FLAG">
-  <app-grid (edit)="edit($event)" (delete)="delete($event)" [data]="gridData"></app-grid>
+  <app-grid (edit)="edit($event)" (delete)="delete($event)" [data]="gridData" ></app-grid>
 </section>

@@ -21,8 +21,6 @@ export class GridComponent implements OnInit, AfterViewInit, OnDestroy {
   dtElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
   dtOptions: any = {};
-  //public data:any = '{"data":[{"id":8603,"firstName":"Superman","lastName":"Yoda"},{"id":870,"firstName":"Foo","lastName":"Whateveryournameis"},{"id":590,"firstName":"Toto","lastName":"Titi"}]}';
-
   @Input() data: any;
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
@@ -36,6 +34,7 @@ export class GridComponent implements OnInit, AfterViewInit, OnDestroy {
       data: this.data,
       columns: this.gridColums(),
       select: true,
+      ordering:  true,
       buttons: [
         'pageLength',
         {
