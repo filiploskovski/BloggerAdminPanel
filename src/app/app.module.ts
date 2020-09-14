@@ -19,7 +19,7 @@ import { NotificationsDropdownMenuComponent } from './pages/main/header/notifica
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppButtonComponent } from './components/app-button/app-button.component';
 
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import { UserDropdownMenuComponent } from './pages/main/header/user-dropdown-menu/user-dropdown-menu.component';
 import { VipticketComponent } from './views/vipticket/vipticket.component';
@@ -28,6 +28,7 @@ import { FreeTipsComponent } from './views/free-tips/free-tips.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import { GridComponent } from './components/grid/grid.component';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -53,6 +54,7 @@ registerLocaleData(localeEn, 'en-EN');
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -64,7 +66,7 @@ registerLocaleData(localeEn, 'en-EN');
     }),
     NgbModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

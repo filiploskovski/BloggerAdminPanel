@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Match } from 'src/app/utils/models/match';
+import {  MatchModel } from 'src/app/utils/models/match';
+import { ApproveMatchesModel } from '../models/ApproveMatchesModel';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,11 @@ export class MatchesService {
 
   constructor() {}
 
-  generateMonthlySubscription(date) {
+  generateMonthlySubscription(date): ApproveMatchesModel {
     return this.findMatches(2, this.dataApi.monthlySubscriptionBetween,date);
   }
 
-  generatetVipTicket(date) {
+  generatetVipTicket(date): ApproveMatchesModel {
     return this.findMatches(4, this.dataApi.vipTicketBetween, date);
   }
 
@@ -29,14 +30,14 @@ export class MatchesService {
     while (true) {
       let rnd = Math.floor(Math.random() * matches.length + 1);
 
-      if (matches[rnd] !== undefined && matches[rnd].coefWin !== null)
+      if (matches[rnd] !== undefined && matches[rnd].Odd !== null)
         lstFinal.push(matches[rnd]);
 
       if (lstFinal.length == numberOfMatches) {
         finalCoef = 1;
 
         lstFinal.forEach((match) => {
-          finalCoef *= match.coefWin;
+          finalCoef *= match.Odd;
         });
 
         if (finalCoef > arrCoefBetween[0] && finalCoef < arrCoefBetween[1]) {
@@ -47,13 +48,7 @@ export class MatchesService {
       }
     }
 
-    const returnObject = {
-      totalOdd: finalCoef.toFixed(2),
-      list: lstFinal,
-    };
-    console.log(returnObject);
-
-    return returnObject;
+    return new ApproveMatchesModel(lstFinal,parseFloat(finalCoef.toFixed(2)),date);
   }
 
   private getMatches(date) {
@@ -66,7 +61,7 @@ export class MatchesService {
     request.onload = function () {
       JSON.parse(this.response).forEach((match) => {
         if (match.SP == 'Фудбал' && match.SMK == 'Крај' && that.time(match)) {
-          matches.push(new Match(match));
+          matches.push(new MatchModel(match));
         }
       });
     };
