@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatchesService } from 'src/app/utils/services/matches.service';
+import { NotifyService } from 'src/app/utils/services/notify.service';
 import { ApiService } from 'src/app/utils/services/api.service';
 import { ApproveMatchesModel } from 'src/app/utils/models/ApproveMatchesModel';
 import { DatePipe } from '@angular/common';
-import { MatchModel } from 'src/app/utils/models/match';
+import { GridComponent } from 'src/app/components/grid/grid.component';
 
 @Component({
   selector: 'app-monthly-subscription',
@@ -12,6 +13,8 @@ import { MatchModel } from 'src/app/utils/models/match';
   styleUrls: ['./monthly-subscription.component.scss'],
 })
 export class MonthlySubscriptionComponent implements OnInit {
+  @ViewChild(GridComponent) gridComponent:GridComponent;
+  
   public EDIT_FLAG = true;
   public GRID_FLAG = false;
   public gridData = [];
@@ -37,21 +40,21 @@ export class MonthlySubscriptionComponent implements OnInit {
   constructor(
     private matchesService: MatchesService,
     private apiService: ApiService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private notifyService: NotifyService
   ) {}
 
   ngOnInit(): void {
     this.PageLoad();
   }
 
-  changeMenu(menu) {
-    if (menu == 1) {
-      this.EDIT_FLAG = true;
-      this.GRID_FLAG = false;
-    } else {
-      this.EDIT_FLAG = false;
-      this.GRID_FLAG = true;
-    }
+  PageLoad() {
+    this.apiService.MonthlySubscriptionLoad().subscribe({
+      next: (item: any) => {
+        this.gridData = item.Matches;
+      },
+      complete:() => {this.gridComponent.rerender()}
+    });
   }
 
   GenerateMS() {
@@ -68,16 +71,9 @@ export class MonthlySubscriptionComponent implements OnInit {
         next: () => {},
         complete: () => {
           this.PageLoad();
+          this.notifyService.showDefaultSuccess();
         },
       });
-  }
-
-  PageLoad() {
-    this.apiService.MonthlySubscriptionLoad().subscribe({
-      next: (item: any) => {
-        this.gridData = item.Matches;
-      },
-    });
   }
 
   edit($event) {
@@ -90,20 +86,34 @@ export class MonthlySubscriptionComponent implements OnInit {
     this.apiService
       .MonthlySubscriptionCreateOrUpdate(this.createUpdate.value)
       .subscribe({
-        next: (item) => {
-          console.log(item, 'Zavrsi');
-        },
+        next: () => {},
+        complete: () => {
+          this.PageLoad();
+          this.notifyService.showDefaultSuccess()},
+        error: () => {},
       });
   }
 
   delete(data) {
     for (let i = 0; i < data.length; i++) {
-        this.apiService.MonthlySubscriptionDelete(data[i].Id).subscribe({
-        next: (item) => {
-          console.log(item);
+      this.apiService.MonthlySubscriptionDelete(data[i].Id).subscribe({
+        next: () => {},
+        complete: () => {
+          this.PageLoad();
+          this.notifyService.showDefaultSuccess()
         },
+        error: () => {},
       });
     }
-    this.PageLoad();
+  }
+
+  changeMenu(menu) {
+    if (menu == 1) {
+      this.EDIT_FLAG = true;
+      this.GRID_FLAG = false;
+    } else {
+      this.EDIT_FLAG = false;
+      this.GRID_FLAG = true;
+    }
   }
 }

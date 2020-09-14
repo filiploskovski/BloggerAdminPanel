@@ -59,11 +59,7 @@ registerLocaleData(localeEn, 'en-EN');
     ReactiveFormsModule,
     BrowserAnimationsModule,
     DataTablesModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
+    ToastrModule.forRoot(),
     NgbModule
   ],
   providers: [DatePipe],
