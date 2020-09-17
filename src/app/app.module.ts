@@ -29,6 +29,7 @@ import { FreeTipsComponent } from './views/free-tips/free-tips.component';
 import { DataTablesModule } from 'angular-datatables';
 import { GridComponent } from './components/grid/grid.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TableComponent } from './components/table/table.component';
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -51,6 +52,7 @@ registerLocaleData(localeEn, 'en-EN');
     MonthlySubscriptionComponent,
     FreeTipsComponent,
     GridComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,

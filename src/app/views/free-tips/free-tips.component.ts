@@ -12,4 +12,8 @@ export class FreeTipsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changeMenu(item){
+    
+  }
+
 }

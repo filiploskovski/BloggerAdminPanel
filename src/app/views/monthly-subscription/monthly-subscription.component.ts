@@ -14,7 +14,6 @@ import { GridComponent } from 'src/app/components/grid/grid.component';
 })
 export class MonthlySubscriptionComponent implements OnInit {
   @ViewChild(GridComponent) gridComponent:GridComponent;
-  
   public EDIT_FLAG = true;
   public GRID_FLAG = false;
   public gridData = [];
@@ -34,7 +33,6 @@ export class MonthlySubscriptionComponent implements OnInit {
     WinLose: new FormControl('', [Validators.required]),
   });
 
-  public tableHeaders = [];
   public tableMatches: ApproveMatchesModel;
 
   constructor(
@@ -62,7 +60,6 @@ export class MonthlySubscriptionComponent implements OnInit {
     this.tableMatches = this.matchesService.generateMonthlySubscription(
       this.generateMSForm.value.date
     );
-    this.tableHeaders = Object.keys(this.tableMatches.Matches[0]);
   }
 
   Approve() {

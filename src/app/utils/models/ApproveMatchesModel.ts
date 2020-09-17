@@ -10,4 +10,5 @@ export class ApproveMatchesModel {
     this.TotalOdd = totalOdd;
     this.Date = date;
   }
+  
 }

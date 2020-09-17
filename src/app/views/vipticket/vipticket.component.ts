@@ -16,14 +16,12 @@ export class VipticketComponent implements OnInit {
     generateVipTicketDate: new FormControl('',[Validators.required]),
   });
 
-  public generatedVipTicket: any;
-  public generatedVipTicketTableHeaders = [];
+  public tableMatches: any;
   public geratedVipTicketTotalWin = 1;
 
   constructor(private matchesService: MatchesService) {}
 
   ngOnInit(): void {
-    console.log(this.generatedVipTicketTableHeaders);
   }
 
   changeMenu(menu) {
@@ -37,13 +35,11 @@ export class VipticketComponent implements OnInit {
   }
 
   onKey(event: any) { 
-    this.geratedVipTicketTotalWin = (event.target.value * this.generatedVipTicket.totalOdd); 
+    this.geratedVipTicketTotalWin = (event.target.value * this.tableMatches.TotalOdd); 
   }
 
   GenerateVipTicketSubmit(){
-      console.log(this.generateVipTicketForm);
-      this.generatedVipTicket = this.matchesService.generatetVipTicket(this.generateVipTicketForm.value.generateVipTicketDate);
-      this.generatedVipTicketTableHeaders = Object.keys(this.generatedVipTicket.list[0]);
+      this.tableMatches = this.matchesService.generatetVipTicket(this.generateVipTicketForm.value.generateVipTicketDate);
   }
 
   GenerateVipTicketTemplates(){
