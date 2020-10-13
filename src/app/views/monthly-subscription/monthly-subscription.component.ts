@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatchesService } from 'src/app/utils/services/matches.service';
+import { MatchesService } from 'src/app/utils/services/matches/matches.service';
 import { NotifyService } from 'src/app/utils/services/notify.service';
-import { ApiService } from 'src/app/utils/services/api.service';
+import { ApiService } from 'src/app/utils/services/api/api.service';
 import { ApproveMatchesModel } from 'src/app/utils/models/ApproveMatchesModel';
 import { DatePipe } from '@angular/common';
 import { GridComponent } from 'src/app/components/grid/grid.component';
@@ -33,7 +33,7 @@ export class MonthlySubscriptionComponent implements OnInit {
     WinLose: new FormControl('', [Validators.required]),
   });
 
-  public tableMatches: ApproveMatchesModel;
+  public tableMatches: any;
 
   constructor(
     private matchesService: MatchesService,

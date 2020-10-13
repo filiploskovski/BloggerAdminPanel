@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {  MatchModel } from 'src/app/utils/models/match';
-import { ApproveMatchesModel } from '../models/ApproveMatchesModel';
+import { MatchModel } from 'src/app/utils/models/match';
+import { ApproveMatchesModel } from '../../models/ApproveMatchesModel';
 
 @Injectable({
   providedIn: 'root',
@@ -9,17 +9,23 @@ export class MatchesService {
   private url = 'https://dapi.beto2.com/Results/GetAllFlatSkr?DatumParovi=';
   //This shoud go from API
   private dataApi = JSON.parse(
-    '{"leagues":["Cyprus 1","Uruguay 1","Egypt 1"],"timePeriod":[1300,2000],"freeMatchesMaxCoef":1.8,"monthlySubscriptionBetween":[9,20],"vipTicketBetween":[250,300]}'
+    '{"leagues":["Cyprus 1","Uruguay 1","Egypt 1","England FA Cup"],"timePeriod":[1300,2200],"freeMatchesMaxCoef":1.8,"monthlySubscriptionBetween":[9,20],"vipTicketBetween":[250,300]}'
   );
 
   constructor() {}
 
   generateMonthlySubscription(date): ApproveMatchesModel {
-    return this.findMatches(2, this.dataApi.monthlySubscriptionBetween,date);
+    return this.findMatches(2, this.dataApi.monthlySubscriptionBetween, date);
   }
 
   generatetVipTicket(date): ApproveMatchesModel {
     return this.findMatches(4, this.dataApi.vipTicketBetween, date);
+  }
+
+  generateFreeTips(date) {
+    const matches = this.getMatches(date, false).filter((item: MatchModel) =>
+       this.dataApi.leagues.includes(item.League));
+      console.log(matches);
   }
 
   private findMatches(numberOfMatches, arrCoefBetween, date) {
@@ -48,10 +54,14 @@ export class MatchesService {
       }
     }
 
-    return new ApproveMatchesModel(lstFinal,parseFloat(finalCoef.toFixed(2)),date);
+    return new ApproveMatchesModel(
+      lstFinal,
+      parseFloat(finalCoef.toFixed(2)),
+      date
+    );
   }
 
-  private getMatches(date) {
+  private getMatches(date, isFinished = true) {
     const that = this;
     let matches = [];
     let dateParsed = new Date(date).toLocaleDateString();
@@ -60,8 +70,14 @@ export class MatchesService {
     request.open('get', url, false);
     request.onload = function () {
       JSON.parse(this.response).forEach((match) => {
-        if (match.SP == 'Фудбал' && match.SMK == 'Крај' && that.time(match)) {
-          matches.push(new MatchModel(match));
+        if (match.SP == 'Фудбал' && that.time(match)) {
+          if (isFinished) {
+            if (match.SMK == 'Крај') {
+              matches.push(new MatchModel(match));
+            }
+          }else{
+            matches.push(new MatchModel(match));
+          }
         }
       });
     };

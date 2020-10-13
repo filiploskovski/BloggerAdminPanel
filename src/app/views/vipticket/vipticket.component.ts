@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { MatchesService } from 'src/app/utils/services/matches.service';
+import { MatchesService } from 'src/app/utils/services/matches/matches.service';
 
 @Component({
   selector: 'app-vipticket',
@@ -40,6 +40,7 @@ export class VipticketComponent implements OnInit {
 
   GenerateVipTicketSubmit(){
       this.tableMatches = this.matchesService.generatetVipTicket(this.generateVipTicketForm.value.generateVipTicketDate);
+      console.log(this.tableMatches)
   }
 
   GenerateVipTicketTemplates(){

@@ -24,6 +24,7 @@ export class GridComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() data: any;
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
+  @Output() multipleLogic: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
@@ -31,10 +32,22 @@ export class GridComponent implements OnInit, AfterViewInit, OnDestroy {
     const that = this;
     this.dtOptions = {
       dom: 'Bfrtip',
-      data: this.data,
+      //data: this.data,
+      serverSide: true,
+      ajax: {
+        url: 'https://localhost:5001/api/monthly-subscription',
+        type: 'POST',
+        contentType: "application/json",
+        datatype:'json',
+        dataSrc: "MatchesDataTable"
+      },
       columns: this.gridColums(),
       select: true,
-      ordering:  true,
+      ordering: true,
+      lengthMenu: [
+        [10, 25, 50, -1],
+        ['10 rows', '25 rows', '50 rows', 'Show all'],
+      ],
       buttons: [
         'pageLength',
         {
@@ -52,6 +65,12 @@ export class GridComponent implements OnInit, AfterViewInit, OnDestroy {
           text: 'Delete',
           action: function (e, dt, node, config) {
             that.delete.emit(dt.rows({ selected: true }).data());
+          },
+        },
+        {
+          text: 'InsertFreeTips',
+          action: function (e, dt, node, config) {
+            that.multipleLogic.emit(dt.rows({ selected: true }).data());
           },
         },
       ],
